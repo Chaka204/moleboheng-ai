@@ -23,6 +23,15 @@ body {
     color: white;
 }
 
+.browser-note {
+    background: #E3F2FD;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-left: 4px solid #2196F3;
+}
+
 .controls {
     display: flex;
     gap: 10px;
@@ -63,6 +72,17 @@ button:disabled {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
+}
+
+/* Voice recording animation */
+@keyframes recording {
+    0% { box-shadow: 0 0 5px #FF0000; }
+    50% { box-shadow: 0 0 20px #FF0000; }
+    100% { box-shadow: 0 0 5px #FF0000; }
+}
+
+.listening {
+    animation: recording 1.5s infinite !important;
 }
 
 #conversation {
@@ -140,6 +160,25 @@ button:disabled {
     background: #FFF3CD;
 }
 
+.text-input-container {
+    margin-top: 15px;
+}
+
+.text-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #2E8B57;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #3CB371;
+    box-shadow: 0 0 5px rgba(60, 179, 113, 0.5);
+}
+
 .footer {
     text-align: center;
     margin-top: 20px;
@@ -147,7 +186,8 @@ button:disabled {
     font-size: 0.9em;
 }
 
-@media (max-width: 600px) {
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
     body {
         padding: 10px;
     }
@@ -163,5 +203,27 @@ button:disabled {
     button {
         width: 100%;
         justify-content: center;
+        font-size: 18px;
+        padding: 15px;
+    }
+    
+    .message {
+        max-width: 90%;
+        font-size: 16px;
+    }
+    
+    .text-input {
+        font-size: 18px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .header p {
+        font-size: 0.9em;
     }
 }
