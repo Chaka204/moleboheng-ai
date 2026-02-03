@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moleboheng - Sesotho Voice AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗣️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🗣️ Moleboheng</h1>
+            <p>Sesotho Voice AI Assistant</p>
+            <p>Bua ka Sesotho, ithute ka Sesotho</p>
+        </header>
+        
+        <div class="status" id="status">Status: Loading...</div>
+        
+        <div class="controls">
+            <button id="micBtn" class="primary-btn">
+                🎤 Speak Sesotho
+            </button>
+        </div>
+        
+        <div class="conversation" id="conversation">
+            <!-- Messages will appear here -->
+        </div>
+        
+        <div class="suggestions" id="suggestions">
+            <!-- Suggestions will appear here -->
+        </div>
+        
+        <div class="footer">
+            <p>Moleboheng AI &copy; 2024 | Ctrl+Space to toggle microphone</p>
+            <p>Voice AI for Sesotho language preservation</p>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
