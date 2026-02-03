@@ -7,24 +7,26 @@ class MolebohengAI {
         
         this.isListening = false;
         this.recognition = null;
+        this.speechSupported = false;
         
         this.init();
     }
     
     init() {
-        this.setupSpeechRecognition();
+        this.checkSpeechSupport();
         this.bindEvents();
         this.updateStatus('Ready to speak Sesotho');
         this.showWelcome();
         this.loadSuggestions();
     }
     
-    setupSpeechRecognition() {
+    checkSpeechSupport() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         
         if (!SpeechRecognition) {
-            this.showError('Browser does not support speech recognition');
+            this.showError('Your browser does not support speech recognition. Try Chrome or Firefox.');
             this.micBtn.disabled = true;
+            this.speechSupported = false;
             return;
         }
         
@@ -32,19 +34,28 @@ class MolebohengAI {
         this.recognition.lang = 'st-ZA';
         this.recognition.continuous = false;
         this.recognition.interimResults = false;
+        this.recognition.maxAlternatives = 1;
         
+        // Set up event handlers
+        this.setupRecognitionEvents();
+        this.speechSupported = true;
+    }
+    
+    setupRecognitionEvents() {
         this.recognition.onstart = () => {
             this.isListening = true;
             this.updateButtonState();
-            this.updateStatus('Listening... Speak now');
+            this.updateStatus('🎤 Listening... Speak now in Sesotho');
         };
         
         this.recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
+            console.log('Speech recognized:', transcript);
             this.handleUserInput(transcript);
         };
         
         this.recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
             this.handleRecognitionError(event.error);
         };
         
@@ -66,7 +77,29 @@ class MolebohengAI {
             }
         });
         
-        // Keyboard shortcut: Space key to toggle listening
+        // Add text input fallback
+        const textInput = document.createElement('input');
+        textInput.type = 'text';
+        textInput.placeholder = 'Or type Sesotho here...';
+        textInput.style.cssText = `
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 2px solid #2E8B57;
+            border-radius: 8px;
+            font-size: 16px;
+        `;
+        
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && textInput.value.trim()) {
+                this.handleUserInput(textInput.value.trim());
+                textInput.value = '';
+            }
+        });
+        
+        this.micBtn.parentNode.appendChild(textInput);
+        
+        // Keyboard shortcut
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && e.ctrlKey) {
                 e.preventDefault();
@@ -87,12 +120,25 @@ class MolebohengAI {
     }
     
     startListening() {
-        if (this.recognition && !this.isListening) {
-            try {
-                this.recognition.start();
-            } catch (error) {
-                this.showError('Could not start microphone');
-            }
+        if (!this.speechSupported) {
+            this.showError('Speech recognition not supported in this browser');
+            return;
+        }
+        
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Request microphone permission first
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(() => {
+                    console.log('Microphone access granted');
+                    this.recognition.start();
+                })
+                .catch((err) => {
+                    console.error('Microphone access denied:', err);
+                    this.handleRecognitionError('not-allowed');
+                });
+        } else {
+            // Fallback for browsers without getUserMedia
+            this.recognition.start();
         }
     }
     
@@ -105,7 +151,7 @@ class MolebohengAI {
     async handleUserInput(text) {
         this.addMessage('user', text);
         this.isProcessing = true;
-        this.updateStatus('Processing...');
+        this.updateStatus('Processing your Sesotho...');
         this.updateButtonState();
         
         try {
@@ -125,7 +171,7 @@ class MolebohengAI {
             this.speakResponse(data.response);
             
         } catch (error) {
-            console.error('Error:', error);
+            console.error('API Error:', error);
             this.addMessage('bot', 'Ho na le bothata ka server. Ka kopo, leka hape.');
         } finally {
             this.isProcessing = false;
@@ -159,21 +205,46 @@ class MolebohengAI {
     }
     
     speakResponse(text) {
-        if (!window.speechSynthesis) return;
+        if (!window.speechSynthesis) {
+            console.log('Text-to-speech not supported');
+            return;
+        }
+        
+        // Cancel any ongoing speech
+        speechSynthesis.cancel();
         
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'st-ZA';
         utterance.rate = 0.9;
+        utterance.pitch = 1;
+        utterance.volume = 1;
         
-        // Try to find Sesotho voice
-        const voices = speechSynthesis.getVoices();
-        const sesothoVoice = voices.find(voice => voice.lang === 'st-ZA' || voice.lang.includes('st'));
+        // Wait for voices to load
+        const speak = () => {
+            const voices = speechSynthesis.getVoices();
+            console.log('Available voices:', voices);
+            
+            // Try to find Sesotho/SA voice
+            const sesothoVoice = voices.find(voice => 
+                voice.lang === 'st-ZA' || 
+                voice.lang === 'af-ZA' || 
+                voice.lang.includes('Africa') ||
+                voice.name.includes('South Africa')
+            );
+            
+            if (sesothoVoice) {
+                utterance.voice = sesothoVoice;
+                console.log('Using voice:', sesothoVoice.name);
+            }
+            
+            speechSynthesis.speak(utterance);
+        };
         
-        if (sesothoVoice) {
-            utterance.voice = sesothoVoice;
+        if (speechSynthesis.getVoices().length === 0) {
+            speechSynthesis.onvoiceschanged = speak;
+        } else {
+            speak();
         }
-        
-        speechSynthesis.speak(utterance);
     }
     
     updateStatus(text) {
@@ -200,16 +271,23 @@ class MolebohengAI {
     showWelcome() {
         setTimeout(() => {
             this.addMessage('bot', 'Lumela! Ke Moleboheng. U ka bua le \'na ka Sesotho.');
-            this.speakResponse('Lumela! Ke Moleboheng. U ka bua le nna ka Sesotho.');
+            // Don't auto-speak on mobile
+            if (!this.isMobileDevice()) {
+                this.speakResponse('Lumela! Ke Moleboheng. U ka bua le nna ka Sesotho.');
+            }
         }, 1000);
     }
     
+    isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
     loadSuggestions() {
-        const suggestions = ['Lumela', 'Kea leboha', 'Lebitso la hau ke mang?', 'Sala hantle'];
+        const suggestions = ['Lumela', 'Kea leboha', 'Lebitso la hau ke mang?', 'Sala hantle', 'O phela joang?'];
         
         if (this.suggestions) {
             this.suggestions.innerHTML = `
-                <p><strong>Try saying:</strong></p>
+                <p><strong>Try saying or clicking:</strong></p>
                 ${suggestions.map(text => 
                     `<span class="suggestion-item">${text}</span>`
                 ).join(' ')}
@@ -218,22 +296,36 @@ class MolebohengAI {
     }
     
     handleRecognitionError(error) {
-        let message = 'Microphone error. Please try again.';
+        let message = 'Ha ke a utloa hantle. Ka kopo, leka hape.';
+        let statusMsg = 'Microphone error';
         
         switch(error) {
             case 'no-speech':
-                message = 'No speech detected.';
+                message = 'Ha ho lentsoe le utloahalang. Ka kopo, buisa hape.';
+                statusMsg = 'No speech detected';
                 break;
             case 'audio-capture':
-                message = 'No microphone found.';
+                message = 'Ha ho microphone e fumanehang.';
+                statusMsg = 'No microphone found';
                 break;
             case 'not-allowed':
-                message = 'Microphone permission denied.';
+            case 'permission-denied':
+                message = 'Tumello ea microphone ha e\'a fuoa. Ka kopo, fana ka tumello.';
+                statusMsg = 'Microphone permission denied';
+                break;
+            case 'network':
+                message = 'Bothata ka marang-rang. Ka kopo, netefatsa hore u ikopanye le inthanete.';
+                statusMsg = 'Network error';
+                break;
+            case 'language-not-supported':
+                message = 'Sesotho ha se tšehetsoe ke sebatli. Ka kopo, sebedisa Chrome.';
+                statusMsg = 'Language not supported';
                 break;
         }
         
-        this.updateStatus(message);
-        this.addMessage('bot', 'Ha ke a utloa hantle. Ka kopo, leka hape.');
+        console.error(`Speech recognition error: ${error}`);
+        this.updateStatus(statusMsg);
+        this.addMessage('bot', message);
         
         setTimeout(() => {
             this.updateStatus('Ready to speak');
@@ -247,5 +339,24 @@ class MolebohengAI {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    // Add browser compatibility warning
+    const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+    const isFirefox = typeof InstallTrigger !== 'undefined';
+    
+    if (!isChrome && !isFirefox) {
+        const warning = document.createElement('div');
+        warning.style.cssText = `
+            background: #FFF3CD;
+            border: 1px solid #FFEAA7;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            color: #856404;
+        `;
+        warning.innerHTML = '💡 <strong>Tip:</strong> For best speech recognition, use Chrome or Firefox browser.';
+        document.querySelector('.container').prepend(warning);
+    }
+    
     window.moleboheng = new MolebohengAI();
 });
