@@ -1,1 +1,26 @@
 
+{
+  "responses": [
+    {
+      "id": 1,
+      "phrase_id": 1,
+      "response_sesotho": "Lumela! O kae?",
+      "response_english": "Hello! How are you?",
+      "response_type": "friendly"
+    },
+    {
+      "id": 2,
+      "phrase_id": 1,
+      "response_sesotho": "Lumela, kea leboha!",
+      "response_english": "Hello, thank you!",
+      "response_type": "grateful"
+    },
+    {
+      "id": 3,
+      "phrase_id": 1,
+      "response_sesotho": "Lumela, u phela joang?",
+      "response_english": "Hello, how are you doing?",
+      "response_type": "inquisitive"
+    }
+  ]
+}
