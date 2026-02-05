@@ -1,0 +1,47 @@
+
+{
+  "cultural_contexts": [
+    {
+      "id": 1,
+      "title": "Liila tsa bana (Children's Taboos)",
+      "description": "Traditional restrictions and teachings for Basotho children.",
+      "content": "Bana ba thibeloa ho ja likahare, mahe, matšela-nokana; ho tsamaea sakeng, patlello; ho bitsa batho ba baholo ka mabitso.",
+      "categories": ["cultural_context"]
+    },
+    {
+      "id": 2,
+      "title": "Mekhoa ea lenyalo (Marriage Customs)",
+      "description": "Traditional Basotho marriage practices and relationships.",
+      "content": "Mokhoenjana o hlokomeloa hantle; ngoetsi e ngalla motšeo; ho se bitsa matsale ka lebitso; ho hlokomela boitšoaro le ba boholo.",
+      "categories": ["cultural_context", "family_relationships"]
+    },
+    {
+      "id": 3,
+      "title": "Litaba tsa lefa (Inheritance Matters)",
+      "description": "Traditional and modern approaches to inheritance in Basotho culture.",
+      "content": "Lefa le fetisoa ho mora; likhang tsa mafa li rarolloa ka mekhoa ea setso; ho baballa lefa ho bohlokoa.",
+      "categories": ["cultural_context"]
+    },
+    {
+      "id": 4,
+      "title": "Lipapali tsa setso (Traditional Games)",
+      "description": "Games that teach skills and social values.",
+      "content": "Morabaraba (board game), mohobelo (traditional dance), mantloane (family role-playing), khotsoana (counting game).",
+      "categories": ["cultural_context", "traditional_games"]
+    },
+    {
+      "id": 5,
+      "title": "Mekhoa ea boipheliso (Livelihood Methods)",
+      "description": "Traditional ways of making a living in Basotho society.",
+      "content": "Temo (farming), mafisa (cattle lending), matsema (community work), phapanyetsano (barter trade).",
+      "categories": ["cultural_context"]
+    },
+    {
+      "id": 6,
+      "title": "Litšomo (Folktales)",
+      "description": "Traditional stories that teach moral lessons.",
+      "content": "Litšomo li ruta botho, bohlale le mekhoa ea bophelo. Mohlala: Tšomo ea Mosimoli le Mosimotsana e ruta ho bolokela kamoso.",
+      "categories": ["cultural_context"]
+    }
+  ]
+}
