@@ -1,3 +1,4 @@
+
 {
   "categories": [
     {
@@ -23,6 +24,42 @@
       "name": "responses",
       "display_name": "Responses",
       "description": "Common responses"
+    },
+    {
+      "id": 5,
+      "name": "grammar_structures",
+      "display_name": "Grammar Structures",
+      "description": "Sesotho grammatical structures and sentence formation"
+    },
+    {
+      "id": 6,
+      "name": "cultural_context",
+      "display_name": "Cultural Context",
+      "description": "Basotho traditions, customs, and social practices"
+    },
+    {
+      "id": 7,
+      "name": "literary_devices",
+      "display_name": "Literary Devices",
+      "description": "Mekhabo-puo and rhetorical devices in Sesotho"
+    },
+    {
+      "id": 8,
+      "name": "writing_forms",
+      "display_name": "Writing Forms",
+      "description": "Different forms of Sesotho writing"
+    },
+    {
+      "id": 9,
+      "name": "traditional_games",
+      "display_name": "Traditional Games",
+      "description": "Basotho traditional games and activities"
+    },
+    {
+      "id": 10,
+      "name": "family_relationships",
+      "display_name": "Family Relationships",
+      "description": "Family terms and relationship dynamics"
     }
   ]
 }
