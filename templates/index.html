@@ -26,6 +26,18 @@
                 🎤 Speak Sesotho
             </button>
         </div>
+
+        <!-- Add this to your existing index.html -->
+<div class="categories">
+    <h2>Browse by Category</h2>
+    <div class="category-grid">
+        {% for category in categories %}
+        <a href="{{ url_for('category_phrases', category_name=category) }}" class="category-card">
+            {{ category }}
+        </a>
+        {% endfor %}
+    </div>
+</div>
         
         <div class="conversation" id="conversation">
             <!-- Messages will appear here -->
