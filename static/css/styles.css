@@ -85,6 +85,26 @@ button:disabled {
     animation: recording 1.5s infinite !important;
 }
 
+.text-input-container {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.text-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #2E8B57;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #3CB371;
+    box-shadow: 0 0 5px rgba(60, 179, 113, 0.5);
+}
+
 #conversation {
     min-height: 400px;
     max-height: 500px;
@@ -158,25 +178,6 @@ button:disabled {
 
 .suggestion-item:hover {
     background: #FFF3CD;
-}
-
-.text-input-container {
-    margin-top: 15px;
-}
-
-.text-input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #2E8B57;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-top: 5px;
-}
-
-.text-input:focus {
-    outline: none;
-    border-color: #3CB371;
-    box-shadow: 0 0 5px rgba(60, 179, 113, 0.5);
 }
 
 .footer {
