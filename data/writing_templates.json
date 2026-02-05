@@ -1,0 +1,58 @@
+
+{
+  "templates": [
+    {
+      "id": 1,
+      "type": "lengolo_la_setsoalle",
+      "name": "Friendly Letter Template",
+      "structure": [
+        "Aterese ea mongoli (Sender's address)",
+        "Letsatsi (Date)",
+        "Tumeliso (Greeting)",
+        "Bohare (Body): Qalo, Ntšetso-pele, Phethelo",
+        "Qetello (Closing)",
+        "Lebitso (Signature)"
+      ],
+      "example": "Box 56 Pitso Ground 102\nLa 22 Pherekhong 2020\n\nLumela Motsoalle,\n\nKe ngolla ho u tsebisa...\n\nKa lerato,\nLeeto"
+    },
+    {
+      "id": 2,
+      "type": "lengolo_la_tšebetso",
+      "name": "Formal/Business Letter Template",
+      "structure": [
+        "Liaterese tse peli (Both addresses)",
+        "Letsatsi (Date)",
+        "Sehlooho (Subject)",
+        "Tumeliso (Formal greeting)",
+        "Bohare (Body)",
+        "Qetello (Closing)",
+        "Mokoallo (Complimentary close)",
+        "Lebitso le boemo (Name and position)"
+      ],
+      "example": "Box 56 Pitso Ground 102\nMookameli\nBox 235 Mafeteng 900\n\nLa 22 Pherekhong 2020\n\nKOPO EA MOSEBETSI\n\nMonghali,\n\nKe balile koranteng...\n\nKa boikokobetso,\nLeeto Bernard"
+    },
+    {
+      "id": 3,
+      "type": "moqoqo_tlhalosi",
+      "name": "Descriptive Essay Template",
+      "structure": [
+        "Sehlooho (Title in capital letters)",
+        "Selelekela (Introduction)",
+        "Bohare (Body with sensory details)",
+        "Qetello (Conclusion)"
+      ],
+      "guidelines": "Sebelisa puo e manoni, karaburetso (sensory description), le mekhabo-puo."
+    },
+    {
+      "id": 4,
+      "type": "moqoqo_tšekatšeko",
+      "name": "Discursive Essay Template",
+      "structure": [
+        "Selelekela se hohelang (Engaging introduction)",
+        "Bohare ka lintlha tse fapaneng (Body with different points)",
+        "Qetello e akaretsang (Comprehensive conclusion)"
+      ],
+      "guidelines": "Hlahisa lintlha tse fapaneng ka tatellano, sebelisa tlotlo-ntsoe (idioms/proverbs)."
+    }
+  ]
+}
