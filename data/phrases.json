@@ -1,5 +1,4 @@
-[file name]: phrases.json
-[file content begin]
+
 {
   "phrases": [
     {
@@ -214,4 +213,3 @@
     }
   ]
 }
-[file content end]
