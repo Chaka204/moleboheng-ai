@@ -1,0 +1,77 @@
+
+{
+  "modules": [
+    {
+      "id": 1,
+      "title": "Ho Mamela le ho Bala (Listening and Reading)",
+      "description": "Developing comprehension skills through listening and reading Sesotho texts.",
+      "objectives": [
+        "Understand spoken Sesotho in different contexts",
+        "Read and comprehend texts of 600-700 words",
+        "Extract key information from texts"
+      ],
+      "difficulty": "beginner",
+      "estimated_time": 120
+    },
+    {
+      "id": 2,
+      "title": "Ho Bua le ho Ngola (Speaking and Writing)",
+      "description": "Developing expressive skills in speaking and writing Sesotho.",
+      "objectives": [
+        "Speak Sesotho with correct pronunciation",
+        "Write coherent sentences and paragraphs",
+        "Use appropriate vocabulary for different contexts"
+      ],
+      "difficulty": "beginner",
+      "estimated_time": 150
+    },
+    {
+      "id": 3,
+      "title": "Sebopeho sa Puo (Language Structure)",
+      "description": "Understanding Sesotho grammar and sentence structure.",
+      "objectives": [
+        "Identify and use different parts of speech",
+        "Construct grammatically correct sentences",
+        "Understand noun classes and agreement"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": 180
+    },
+    {
+      "id": 4,
+      "title": "Bophelo le Phelisano (Life and Social Interaction)",
+      "description": "Cultural context and social practices in Basotho society.",
+      "objectives": [
+        "Understand Basotho customs and traditions",
+        "Use appropriate language in social situations",
+        "Participate in cultural discussions"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": 120
+    },
+    {
+      "id": 5,
+      "title": "Lingoloa (Literature)",
+      "description": "Study of Sesotho literary forms and analysis.",
+      "objectives": [
+        "Analyze Sesotho folktales (litšomo)",
+        "Understand poetry (lithothokiso)",
+        "Appreciate literary devices in Sesotho"
+      ],
+      "difficulty": "advanced",
+      "estimated_time": 200
+    },
+    {
+      "id": 6,
+      "title": "Mekhoa ea ho Ngola (Writing Forms)",
+      "description": "Master different forms of Sesotho writing.",
+      "objectives": [
+        "Write descriptive and discursive essays",
+        "Compose formal and informal letters",
+        "Create short stories and articles"
+      ],
+      "difficulty": "advanced",
+      "estimated_time": 240
+    }
+  ]
+}
