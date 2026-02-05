@@ -1,3 +1,4 @@
+
 {
   "examples": [
     {
@@ -20,6 +21,83 @@
       "example_sesotho": "Kea leboha haholo.",
       "example_english": "Thank you very much.",
       "context": "grateful"
+    },
+    {
+      "id": 4,
+      "phrase_id": 11,
+      "example_sesotho": "Moshoeshoe o ne a le motle.",
+      "example_english": "Moshoeshoe was handsome.",
+      "context": "grammar_demonstration"
+    },
+    {
+      "id": 5,
+      "phrase_id": 12,
+      "example_sesotho": "Bana ba bapala.",
+      "example_english": "The children are playing.",
+      "context": "grammar_demonstration"
+    },
+    {
+      "id": 6,
+      "phrase_id": 13,
+      "example_sesotho": "Khele! Ke ne ke qala ho makala.",
+      "example_english": "Wow! I was beginning to be surprised.",
+      "context": "grammar_demonstration"
+    },
+    {
+      "id": 7,
+      "phrase_id": 14,
+      "example_sesotho": "Ke ne ke ja 'me ke bapala.",
+      "example_english": "I was eating and playing.",
+      "context": "grammar_demonstration"
+    },
+    {
+      "id": 8,
+      "phrase_id": 16,
+      "example_sesotho": "Bashanyana ba ea kuruetsong ka lilemo tse 18.",
+      "example_english": "Boys go to circumcision school at 18 years.",
+      "context": "cultural_explanation"
+    },
+    {
+      "id": 9,
+      "phrase_id": 20,
+      "example_sesotho": "Ka Sontaha re tla etsa matsema tšimong.",
+      "example_english": "On Sunday we will do community work in the field.",
+      "context": "cultural_explanation"
+    },
+    {
+      "id": 10,
+      "phrase_id": 21,
+      "example_sesotho": "O ts'oana le naledi.",
+      "example_english": "You are like a star.",
+      "context": "literary_example"
+    },
+    {
+      "id": 11,
+      "phrase_id": 22,
+      "example_sesotho": "Ke tau ea naha.",
+      "example_english": "He is a lion of the nation.",
+      "context": "literary_example"
+    },
+    {
+      "id": 12,
+      "phrase_id": 25,
+      "example_sesotho": "Moqoqo-tšekatšeko o ngoloa ka lintlha tse fapaneng.",
+      "example_english": "A discursive essay is written with different points.",
+      "context": "writing_instruction"
+    },
+    {
+      "id": 13,
+      "phrase_id": 27,
+      "example_sesotho": "Lumela motsoalle oa ka...",
+      "example_english": "Hello my friend...",
+      "context": "writing_instruction"
+    },
+    {
+      "id": 14,
+      "phrase_id": 28,
+      "example_sesotho": "Ho Mookameli...",
+      "example_english": "To the Manager...",
+      "context": "writing_instruction"
     }
   ]
 }
