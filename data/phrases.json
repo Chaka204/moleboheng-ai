@@ -14,5 +14,19 @@
       "category": "courtesy",
       "difficulty": "beginner"
     }
+        {
+      "id": 3,
+      "sesotho_phrase": "Ee",
+      "english_translation": "Yes",
+      "category": "basic_responses",
+      "difficulty": "beginner"
+    },
+    {
+      "id": 4,
+      "sesotho_phrase": "Che",
+      "english_translation": "No",
+      "category": "basic_responses",
+      "difficulty": "beginner"
+    }
   ]
 }
