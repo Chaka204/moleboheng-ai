@@ -22,5 +22,12 @@
       "response_english": "Hello, how are you doing?",
       "response_type": "inquisitive"
     }
+        {
+      "id": 4,
+      "phrase_id": 2,
+      "response_sesotho": "O amohelehile",
+      "response_english": "You're welcome",
+      "response_type": "acknowledgment"
+    }
   ]
 }
