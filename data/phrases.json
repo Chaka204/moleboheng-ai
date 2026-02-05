@@ -1,1 +1,18 @@
-
+{
+  "phrases": [
+    {
+      "id": 1,
+      "sesotho_phrase": "Lumela",
+      "english_translation": "Hello",
+      "category": "greetings",
+      "difficulty": "beginner"
+    },
+    {
+      "id": 2,
+      "sesotho_phrase": "Kea leboha",
+      "english_translation": "Thank you",
+      "category": "courtesy",
+      "difficulty": "beginner"
+    }
+  ]
+}
