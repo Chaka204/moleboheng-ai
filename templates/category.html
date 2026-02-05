@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category }} - Sesotho Learning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Sesotho Learning: {{ category }}</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="category-phrases">
+            <h2>Phrases in "{{ category }}"</h2>
+            
+            {% if phrases %}
+            <div class="phrase-list">
+                {% for phrase in phrases %}
+                <div class="phrase-card">
+                    <h3>{{ phrase.sesotho_phrase }}</h3>
+                    <p>{{ phrase.english_translation }}</p>
+                    <a href="{{ url_for('phrase_detail', phrase_id=phrase.id) }}" class="btn">
+                        Learn More
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No phrases found in this category.</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
