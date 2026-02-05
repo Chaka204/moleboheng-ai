@@ -129,3 +129,56 @@ def api_phrase_detail(phrase_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+# In your app.py
+@app.route('/categories')
+def all_categories():
+    categories = load_json_data('categories.json')
+    return render_template('categories.html', categories=categories['categories'])
+
+@app.route('/category/<string:category_name>')
+def category_detail(category_name):
+    categories = load_json_data('categories.json')
+    phrases = load_json_data('phrases.json')
+    
+    # Find the category
+    category = next((c for c in categories['categories'] if c['name'] == category_name), None)
+    
+    if not category:
+        return "Category not found", 404
+    
+    # Get phrases for this category
+    category_phrases = [p for p in phrases['phrases'] if p['category'] == category_name]
+    
+    return render_template('category.html', 
+                         category=category, 
+                         phrases=category_phrases)
+
+@app.route('/phrase/<int:phrase_id>')
+def phrase_detail(phrase_id):
+    phrases = load_json_data('phrases.json')
+    responses = load_json_data('responses.json')
+    examples = load_json_data('usage_examples.json')
+    grammar_rules = load_json_data('grammar_rules.json')
+    cultural_contexts = load_json_data('cultural_context.json')
+    
+    # Find the phrase
+    phrase = next((p for p in phrases['phrases'] if p['id'] == phrase_id), None)
+    
+    if not phrase:
+        return "Phrase not found", 404
+    
+    # Get related data
+    phrase_responses = [r for r in responses['responses'] if r['phrase_id'] == phrase_id]
+    phrase_examples = [e for e in examples['examples'] if e['phrase_id'] == phrase_id]
+    related_grammar = [g for g in grammar_rules['grammar_rules'] 
+                      if phrase.category in g['categories']]
+    related_cultural = [c for c in cultural_contexts['cultural_contexts'] 
+                       if phrase.category in c['categories']]
+    
+    return render_template('phrase_detail.html', 
+                         phrase=phrase,
+                         response_options=phrase_responses,
+                         examples=phrase_examples,
+                         grammar_rules=related_grammar,
+                         cultural_contexts=related_cultural)
