@@ -1,1 +1,19 @@
 
+{
+  "users": [
+    {
+      "user_id": 1,
+      "username": "demo_user",
+      "learning_level": "beginner",
+      "progress": {
+        "phrases_learned": [1, 2],
+        "categories_completed": ["greetings"],
+        "streak_days": 5
+      },
+      "preferences": {
+        "daily_goal": 10,
+        "difficulty": "beginner"
+      }
+    }
+  ]
+}
