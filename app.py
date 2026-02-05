@@ -1,107 +1,131 @@
-from flask import Flask, request, jsonify, render_template, session
 import json
-import random
 import os
-from difflib import get_close_matches
+from flask import Flask, render_template, request, session, jsonify
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-123')
+app.secret_key = 'your-secret-key-here'  # Change this for production
 
-# Load phrase bank
-def load_phrases():
-    try:
-        with open("data/phrase_bank.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data.get("phrases", [])
-    except:
-        # Default phrases if file doesn't exist
-        return [
-            {
-                "sesotho_phrase": "Lumela",
-                "english_translation": "Hello",
-                "response_options": ["Lumela! O kae?", "Lumela, kea leboha!"]
-            },
-            {
-                "sesotho_phrase": "Kea leboha", 
-                "english_translation": "Thank you",
-                "response_options": ["Kea leboha le 'na!", "U amohelehile."]
+class SesothoDatabase:
+    def __init__(self):
+        self.data_path = "data"
+        self.load_all_data()
+    
+    def load_all_data(self):
+        """Load all database files with fallback to old structure"""
+        # Try new structure first
+        try:
+            self.phrases = self._load_json("phrases.json")
+        except FileNotFoundError:
+            # Fallback to old structure
+            old_data = self._load_json("phrase_bank.json")
+            # Convert old structure to new
+            self.phrases = self._convert_old_structure(old_data)
+        
+        # Load other data files (create if don't exist)
+        self.responses = self._load_or_create("responses.json", {"responses": []})
+        self.categories = self._load_or_create("categories.json", {"categories": []})
+        self.examples = self._load_or_create("usage_examples.json", {"examples": []})
+        
+        # Initialize users from session or create demo
+        self.users = {"users": []}
+    
+    def _load_json(self, filename):
+        """Load a JSON file from data folder"""
+        path = os.path.join(self.data_path, filename)
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    
+    def _load_or_create(self, filename, default_data):
+        """Load or create a JSON file"""
+        path = os.path.join(self.data_path, filename)
+        try:
+            return self._load_json(filename)
+        except FileNotFoundError:
+            # Save default data
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(default_data, f, indent=2, ensure_ascii=False)
+            return default_data
+    
+    def _convert_old_structure(self, old_data):
+        """Convert old phrase_bank.json to new structure"""
+        phrases = []
+        for i, item in enumerate(old_data.get('phrases', []), 1):
+            phrase = {
+                'id': i,
+                'sesotho_phrase': item.get('sesotho_phrase', ''),
+                'english_translation': item.get('english_translation', ''),
+                'category': 'uncategorized',  # Default category
+                'difficulty': 'beginner'
             }
-        ]
+            phrases.append(phrase)
+        
+        return {'phrases': phrases}
+    
+    def get_all_phrases(self):
+        """Get all phrases"""
+        return self.phrases.get('phrases', [])
+    
+    def get_phrase_with_responses(self, phrase_id):
+        """Get a phrase with all its responses and examples"""
+        phrase = next((p for p in self.get_all_phrases() if p['id'] == phrase_id), None)
+        if phrase:
+            # Add responses
+            phrase['response_options'] = [
+                r for r in self.responses.get('responses', [])
+                if r.get('phrase_id') == phrase_id
+            ]
+            # Add examples
+            phrase['examples'] = [
+                e for e in self.examples.get('examples', [])
+                if e.get('phrase_id') == phrase_id
+            ]
+        return phrase
+    
+    def get_phrases_by_category(self, category):
+        """Get phrases by category"""
+        return [p for p in self.get_all_phrases() if p.get('category') == category]
 
-phrases = load_phrases()
-
-def get_intent(user_input):
-    user_input = user_input.lower().strip()
-    
-    # 1. Exact match
-    for phrase in phrases:
-        if phrase["sesotho_phrase"].lower() == user_input:
-            return phrase, "exact"
-    
-    # 2. Partial match
-    for phrase in phrases:
-        if phrase["sesotho_phrase"].lower() in user_input:
-            return phrase, "partial"
-    
-    # 3. Fuzzy match
-    phrase_list = [p["sesotho_phrase"].lower() for p in phrases]
-    matches = get_close_matches(user_input, phrase_list, n=1, cutoff=0.6)
-    if matches:
-        for phrase in phrases:
-            if phrase["sesotho_phrase"].lower() == matches[0]:
-                return phrase, "fuzzy"
-    
-    return None, "no_match"
+# Initialize database
+db = SesothoDatabase()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    try:
-        if not request.is_json:
-            return jsonify({"error": "Invalid request"}), 400
-        
-        user_input = request.json.get("message", "").strip()
-        
-        if not user_input:
-            return jsonify({"response": "Ha ke utloile hantle. Ka kopo, buisa hape."})
-        
-        if len(user_input) > 500:
-            return jsonify({"response": "Ho buuoa ha holimo. Ka kopo, buisa ka lentsoe le khutšoanyane."})
-        
-        # Get intent
-        intent_data, match_type = get_intent(user_input)
-        
-        if intent_data:
-            response = random.choice(intent_data["response_options"])
-            metadata = {
-                "intent": intent_data.get("english_translation", "unknown"),
-                "match_type": match_type
-            }
-        else:
-            suggestions = [p["sesotho_phrase"] for p in phrases[:3]]
-            response = f"Ha ke utloisise. Na u bolela: {', '.join(suggestions)}?"
-            metadata = {"match_type": "no_match"}
-        
-        return jsonify({
-            "response": response,
-            "metadata": metadata
-        })
+    """Main page"""
+    # Get all categories
+    categories = set(p.get('category', 'uncategorized') for p in db.get_all_phrases())
     
-    except Exception as e:
-        print(f"Error: {e}")
-        return jsonify({"response": "Ho na le bothata. Ka kopo, leka hape."}), 500
+    return render_template('index.html', 
+                         categories=categories,
+                         phrases=db.get_all_phrases())
 
-@app.route('/api/health')
-def health():
-    return jsonify({
-        "status": "healthy",
-        "service": "Moleboheng AI",
-        "phrases_loaded": len(phrases)
-    })
+@app.route('/phrase/<int:phrase_id>')
+def phrase_detail(phrase_id):
+    """Get detailed phrase information"""
+    phrase = db.get_phrase_with_responses(phrase_id)
+    if phrase:
+        return render_template('phrase_detail.html', phrase=phrase)
+    return "Phrase not found", 404
+
+@app.route('/category/<category_name>')
+def category_phrases(category_name):
+    """Get all phrases in a category"""
+    phrases = db.get_phrases_by_category(category_name)
+    return render_template('category.html', 
+                         category=category_name,
+                         phrases=phrases)
+
+@app.route('/api/phrases')
+def api_phrases():
+    """API endpoint for phrases (for AJAX calls)"""
+    return jsonify(db.get_all_phrases())
+
+@app.route('/api/phrase/<int:phrase_id>')
+def api_phrase_detail(phrase_id):
+    """API endpoint for phrase details"""
+    phrase = db.get_phrase_with_responses(phrase_id)
+    if phrase:
+        return jsonify(phrase)
+    return jsonify({'error': 'Phrase not found'}), 404
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
