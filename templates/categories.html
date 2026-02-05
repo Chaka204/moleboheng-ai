@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Categories - Sesotho Learning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Sesotho Learning Categories</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="categories-grid">
+            {% for category in categories %}
+            <a href="{{ url_for('category_detail', category_name=category.name) }}" 
+               class="category-card">
+                <h3>{{ category.display_name }}</h3>
+                <p>{{ category.description }}</p>
+                <span class="category-count">View Phrases</span>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
