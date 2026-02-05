@@ -1,9 +1,99 @@
 import json
 import os
+import re
+from difflib import SequenceMatcher
 from flask import Flask, render_template, request, session, jsonify
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'  # Change this for production
+
+class SesothoAI:
+    def __init__(self, database):
+        self.db = database
+    
+    def normalize_text(self, text):
+        """Normalize Sesotho text for comparison"""
+        text = text.lower().strip()
+        # Remove extra whitespace and punctuation
+        text = re.sub(r'[^\w\s]', '', text)
+        return text
+    
+    def similarity_score(self, text1, text2):
+        """Calculate similarity between two texts"""
+        return SequenceMatcher(None, text1, text2).ratio()
+    
+    def find_best_match(self, user_input):
+        """Find the best matching phrase in the database"""
+        normalized_input = self.normalize_text(user_input)
+        best_match = None
+        best_score = 0
+        best_phrase = None
+        
+        phrases = self.db.get_all_phrases()
+        
+        for phrase in phrases:
+            # Check Sesotho phrase
+            sesotho_text = self.normalize_text(phrase['sesotho_phrase'])
+            score = self.similarity_score(normalized_input, sesotho_text)
+            
+            # Also check English translation
+            english_text = self.normalize_text(phrase['english_translation'])
+            english_score = self.similarity_score(normalized_input, english_text)
+            
+            # Take the higher score
+            current_score = max(score, english_score * 0.8)  # English matches slightly lower weight
+            
+            if current_score > best_score:
+                best_score = current_score
+                best_phrase = phrase
+        
+        return best_phrase, best_score
+    
+    def generate_response(self, user_input):
+        """Generate a response based on user input"""
+        phrase, score = self.find_best_match(user_input)
+        
+        if phrase and score > 0.6:  # Threshold for matching
+            # Get responses for this phrase
+            responses = [
+                r for r in self.db.responses.get('responses', [])
+                if r.get('phrase_id') == phrase['id']
+            ]
+            
+            if responses:
+                import random
+                response = random.choice(responses)
+                return {
+                    'response': response.get('response_sesotho', 'Kea leboha.'),
+                    'english': response.get('response_english', 'Thank you.'),
+                    'match_type': 'direct_match' if score > 0.8 else 'close_match',
+                    'intent': phrase.get('category', 'general'),
+                    'confidence': round(score, 2),
+                    'original_phrase': phrase['sesotho_phrase'],
+                    'suggested_response': response.get('response_sesotho', '')
+                }
+            else:
+                # No specific response, use the phrase itself
+                return {
+                    'response': phrase['sesotho_phrase'],
+                    'english': phrase['english_translation'],
+                    'match_type': 'phrase_only',
+                    'intent': phrase.get('category', 'general'),
+                    'confidence': round(score, 2)
+                }
+        else:
+            # No match found
+            return {
+                'response': 'Ke kopa utloisise. Ka kopo, buisa hape.',
+                'english': 'I did not understand. Please say it again.',
+                'match_type': 'no_match',
+                'intent': 'unknown',
+                'confidence': 0
+            }
+
+# Initialize the AI after initializing the database
+db = SesothoDatabase()
+ai = SesothoAI(db)
 
 class SesothoDatabase:
     def __init__(self):
@@ -182,3 +272,65 @@ def phrase_detail(phrase_id):
                          examples=phrase_examples,
                          grammar_rules=related_grammar,
                          cultural_contexts=related_cultural)
+
+# Add this route to app.py (after initializing db and ai)
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    """Handle chat requests from the frontend"""
+    try:
+        data = request.json
+        user_message = data.get('message', '').strip()
+        
+        if not user_message:
+            return jsonify({
+                'response': 'Ha ho mantsoe a fanoeng.',
+                'metadata': {
+                    'match_type': 'error',
+                    'intent': 'empty',
+                    'confidence': 0
+                }
+            })
+        
+        # Get AI response
+        ai_response = ai.generate_response(user_message)
+        
+        # Log the interaction
+        log_interaction(user_message, ai_response)
+        
+        return jsonify({
+            'response': ai_response['response'],
+            'metadata': {
+                'match_type': ai_response['match_type'],
+                'intent': ai_response['intent'],
+                'confidence': ai_response['confidence'],
+                'english': ai_response.get('english', '')
+            }
+        })
+        
+    except Exception as e:
+        print(f"Error in chat endpoint: {e}")
+        return jsonify({
+            'response': 'Ho na le bothata. Ka kopo, leka hape.',
+            'metadata': {
+                'match_type': 'error',
+                'intent': 'error',
+                'confidence': 0
+            }
+        }), 500
+
+def log_interaction(user_input, ai_response):
+    """Log user interactions for debugging"""
+    log_entry = {
+        'timestamp': datetime.now().isoformat(),
+        'user_input': user_input,
+        'ai_response': ai_response['response'],
+        'match_type': ai_response['match_type'],
+        'confidence': ai_response['confidence']
+    }
+    
+    # Simple file logging for debugging
+    try:
+        with open('interaction_log.json', 'a', encoding='utf-8') as f:
+            f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
+    except:
+        pass  # Don't crash if logging fails
