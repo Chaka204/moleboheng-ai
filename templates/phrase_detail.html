@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ phrase.sesotho_phrase }} - Sesotho Learning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Sesotho Learning</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="phrase-detail">
+            <h2>{{ phrase.sesotho_phrase }}</h2>
+            <p class="translation">{{ phrase.english_translation }}</p>
+            
+            {% if phrase.response_options %}
+            <div class="responses">
+                <h3>Response Options:</h3>
+                <ul>
+                    {% for response in phrase.response_options %}
+                    <li>
+                        <strong>{{ response.response_sesotho }}</strong>
+                        <br>
+                        <em>{{ response.response_english }}</em>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            {% if phrase.examples %}
+            <div class="examples">
+                <h3>Usage Examples:</h3>
+                <ul>
+                    {% for example in phrase.examples %}
+                    <li>
+                        <strong>{{ example.example_sesotho }}</strong>
+                        <br>
+                        <em>{{ example.example_english }}</em>
+                        <span class="context">({{ example.context }})</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <div class="meta">
+                <p><strong>Category:</strong> {{ phrase.category }}</p>
+                <p><strong>Difficulty:</strong> {{ phrase.difficulty }}</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
