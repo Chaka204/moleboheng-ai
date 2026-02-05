@@ -1,1 +1,28 @@
-
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "greetings",
+      "display_name": "Greetings",
+      "description": "Basic greeting phrases"
+    },
+    {
+      "id": 2,
+      "name": "courtesy",
+      "display_name": "Courtesy",
+      "description": "Polite expressions and thanks"
+    },
+    {
+      "id": 3,
+      "name": "questions",
+      "display_name": "Questions",
+      "description": "Common questions"
+    },
+    {
+      "id": 4,
+      "name": "responses",
+      "display_name": "Responses",
+      "description": "Common responses"
+    }
+  ]
+}
