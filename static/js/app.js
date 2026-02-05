@@ -14,10 +14,27 @@ class MolebohengAI {
     
     init() {
         this.checkSpeechSupport();
+        this.createTextInput(); // Add text input here
         this.bindEvents();
         this.updateStatus('Ready to speak Sesotho');
         this.showWelcome();
         this.loadSuggestions();
+    }
+    
+    createTextInput() {
+        // Create text input container
+        const inputContainer = document.createElement('div');
+        inputContainer.className = 'text-input-container';
+        inputContainer.innerHTML = `
+            <p><strong>Or type Sesotho:</strong></p>
+            <input type="text" class="text-input" id="textInput" placeholder="Type Sesotho phrase here and press Enter...">
+        `;
+        
+        // Insert after the controls div
+        const controls = document.querySelector('.controls');
+        if (controls) {
+            controls.parentNode.insertBefore(inputContainer, controls.nextSibling);
+        }
     }
     
     checkSpeechSupport() {
@@ -69,6 +86,7 @@ class MolebohengAI {
     }
     
     bindEvents() {
+        // Microphone button
         this.micBtn.addEventListener('click', () => {
             if (this.isListening) {
                 this.stopListening();
@@ -77,29 +95,18 @@ class MolebohengAI {
             }
         });
         
-        // Add text input fallback
-        const textInput = document.createElement('input');
-        textInput.type = 'text';
-        textInput.placeholder = 'Or type Sesotho here...';
-        textInput.style.cssText = `
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: 2px solid #2E8B57;
-            border-radius: 8px;
-            font-size: 16px;
-        `;
+        // Text input Enter key
+        const textInput = document.getElementById('textInput');
+        if (textInput) {
+            textInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && textInput.value.trim()) {
+                    this.handleUserInput(textInput.value.trim());
+                    textInput.value = ''; // Clear input
+                }
+            });
+        }
         
-        textInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && textInput.value.trim()) {
-                this.handleUserInput(textInput.value.trim());
-                textInput.value = '';
-            }
-        });
-        
-        this.micBtn.parentNode.appendChild(textInput);
-        
-        // Keyboard shortcut
+        // Keyboard shortcut: Ctrl+Space for microphone
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && e.ctrlKey) {
                 e.preventDefault();
@@ -222,7 +229,6 @@ class MolebohengAI {
         // Wait for voices to load
         const speak = () => {
             const voices = speechSynthesis.getVoices();
-            console.log('Available voices:', voices);
             
             // Try to find Sesotho/SA voice
             const sesothoVoice = voices.find(voice => 
@@ -234,7 +240,6 @@ class MolebohengAI {
             
             if (sesothoVoice) {
                 utterance.voice = sesothoVoice;
-                console.log('Using voice:', sesothoVoice.name);
             }
             
             speechSynthesis.speak(utterance);
@@ -323,7 +328,6 @@ class MolebohengAI {
                 break;
         }
         
-        console.error(`Speech recognition error: ${error}`);
         this.updateStatus(statusMsg);
         this.addMessage('bot', message);
         
@@ -355,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
             color: #856404;
         `;
         warning.innerHTML = '💡 <strong>Tip:</strong> For best speech recognition, use Chrome or Firefox browser.';
-        document.querySelector('.container').prepend(warning);
+        document.querySelector('.container').insertBefore(warning, document.querySelector('.browser-note').nextSibling);
     }
     
     window.moleboheng = new MolebohengAI();
