@@ -7,6 +7,7 @@
       "english_translation": "Hello",
       "category": "greetings",
       "difficulty": "beginner"
+      "keywords": ["hello", "hi", "greet"]
     },
     {
       "id": 2,
@@ -14,6 +15,7 @@
       "english_translation": "Thank you",
       "category": "courtesy",
       "difficulty": "beginner"
+      "keywords": ["thanks", "thank", "gratitude"]
     },
     {
       "id": 3,
@@ -21,6 +23,7 @@
       "english_translation": "Yes",
       "category": "responses",
       "difficulty": "beginner"
+      "keywords": ["yeh", "yeah", "okay"]
     },
     {
       "id": 4,
@@ -28,6 +31,7 @@
       "english_translation": "No",
       "category": "responses",
       "difficulty": "beginner"
+      "keywords": ["nah", "nope", "no"]
     },
     {
       "id": 5,
@@ -35,6 +39,7 @@
       "english_translation": "How are you?",
       "category": "questions",
       "difficulty": "beginner"
+      "keywords": ["how are you", "you good?", "how's it"]
     },
     {
       "id": 6,
@@ -42,6 +47,7 @@
       "english_translation": "I am fine",
       "category": "responses",
       "difficulty": "beginner"
+      "keywords": ["i'm fine", "okay", "i am perfect"]
     },
     {
       "id": 7,
@@ -49,6 +55,7 @@
       "english_translation": "Who are you?",
       "category": "questions",
       "difficulty": "beginner"
+      "keywords": ["you are?", "your name?", "wha are you"]
     },
     {
       "id": 8,
@@ -56,6 +63,7 @@
       "english_translation": "I am...",
       "category": "responses",
       "difficulty": "beginner"
+      "keywords": ["i...", "i am...", "ahhhh"]
     },
     {
       "id": 9,
@@ -63,6 +71,7 @@
       "english_translation": "Where?",
       "category": "questions",
       "difficulty": "beginner"
+      "keywords": ["where", "where is", "where are"]
     },
     {
       "id": 10,
@@ -70,6 +79,7 @@
       "english_translation": "When?",
       "category": "questions",
       "difficulty": "beginner"
+      "keywords": ["when", "when is", "when will"]
     },
     {
       "id": 11,
@@ -77,6 +87,7 @@
       "english_translation": "Adjective (describing word)",
       "category": "grammar_structures",
       "difficulty": "intermediate"
+      "keywords": ["", "", ""]
     },
     {
       "id": 12,
@@ -84,6 +95,7 @@
       "english_translation": "Verb (action word)",
       "category": "grammar_structures",
       "difficulty": "intermediate"
+      "keywords": ["", "", ""]
     },
     {
       "id": 13,
@@ -91,6 +103,7 @@
       "english_translation": "Interjection",
       "category": "grammar_structures",
       "difficulty": "intermediate"
+      "keywords": ["wow", "huh", "hmm"]
     },
     {
       "id": 14,
@@ -98,6 +111,7 @@
       "english_translation": "Conjunction",
       "category": "grammar_structures",
       "difficulty": "intermediate"
+      "keywords": ["and", "but", "then"]
     },
     {
       "id": 15,
@@ -105,6 +119,7 @@
       "english_translation": "Exercise/Training",
       "category": "grammar_structures",
       "difficulty": "intermediate"
+      "keywords": ["", "", ""]
     },
     {
       "id": 16,
@@ -112,13 +127,15 @@
       "english_translation": "Circumcision ceremony",
       "category": "cultural_context",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 17,
-      "sesotho_phrase": "Mokhoenjana",
-      "english_translation": "Bride",
+      "sesotho_phrase": "Mokhoenyana",
+      "english_translation": "Son-in-law",
       "category": "cultural_context",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 18,
@@ -126,6 +143,7 @@
       "english_translation": "Daughter-in-law",
       "category": "cultural_context",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 19,
@@ -133,6 +151,7 @@
       "english_translation": "Friend",
       "category": "family_relationships",
       "difficulty": "intermediate"
+      "keywords": ["friend", "", ""]
     },
     {
       "id": 20,
@@ -140,6 +159,7 @@
       "english_translation": "Community work parties",
       "category": "cultural_context",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 21,
@@ -147,6 +167,7 @@
       "english_translation": "Simile",
       "category": "literary_devices",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 22,
@@ -154,6 +175,7 @@
       "english_translation": "Metaphor",
       "category": "literary_devices",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 23,
@@ -161,6 +183,7 @@
       "english_translation": "Repetition",
       "category": "literary_devices",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 24,
@@ -168,6 +191,7 @@
       "english_translation": "Rhetorical question",
       "category": "literary_devices",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 25,
@@ -175,6 +199,7 @@
       "english_translation": "Discursive essay",
       "category": "writing_forms",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 26,
@@ -182,6 +207,7 @@
       "english_translation": "Descriptive essay",
       "category": "writing_forms",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 27,
@@ -189,6 +215,7 @@
       "english_translation": "Friendly letter",
       "category": "writing_forms",
       "difficulty": "intermediate"
+      "keywords": ["", "", ""]
     },
     {
       "id": 28,
@@ -196,6 +223,7 @@
       "english_translation": "Formal/business letter",
       "category": "writing_forms",
       "difficulty": "intermediate"
+      "keywords": ["", "", ""]
     },
     {
       "id": 29,
@@ -203,6 +231,7 @@
       "english_translation": "Poem",
       "category": "writing_forms",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     },
     {
       "id": 30,
@@ -210,6 +239,7 @@
       "english_translation": "Folktale",
       "category": "writing_forms",
       "difficulty": "advanced"
+      "keywords": ["", "", ""]
     }
   ]
 }
