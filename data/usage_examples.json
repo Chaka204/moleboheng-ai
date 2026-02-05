@@ -1,1 +1,25 @@
-
+{
+  "examples": [
+    {
+      "id": 1,
+      "phrase_id": 1,
+      "example_sesotho": "Lumela, ntate.",
+      "example_english": "Hello, sir.",
+      "context": "formal"
+    },
+    {
+      "id": 2,
+      "phrase_id": 1,
+      "example_sesotho": "Lumela, o kae?",
+      "example_english": "Hello, how are you?",
+      "context": "friendly"
+    },
+    {
+      "id": 3,
+      "phrase_id": 2,
+      "example_sesotho": "Kea leboha haholo.",
+      "example_english": "Thank you very much.",
+      "context": "grateful"
+    }
+  ]
+}
