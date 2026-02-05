@@ -11,6 +11,7 @@
         <h1>Sesotho Learning</h1>
         <nav>
             <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('category_detail', category_name=phrase.category) }}">Back to Category</a>  <!-- Added -->
         </nav>
     </header>
 
@@ -18,6 +19,23 @@
         <div class="phrase-detail">
             <h2>{{ phrase.sesotho_phrase }}</h2>
             <p class="translation">{{ phrase.english_translation }}</p>
+            
+            <!-- Optional: Grammar rules section -->
+            {% if grammar_rules %}
+            <div class="grammar-section">
+                <h3>Grammar Concepts:</h3>
+                <ul>
+                    {% for rule in grammar_rules %}
+                    <li>
+                        <strong>{{ rule.title }}:</strong> {{ rule.description }}
+                        {% if rule.examples %}
+                        <br><em>Examples: {{ rule.examples|join(', ') }}</em>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
             
             {% if phrase.response_options %}
             <div class="responses">
@@ -50,9 +68,26 @@
             </div>
             {% endif %}
             
+            <!-- Cultural context section -->
+            {% if cultural_contexts %}
+            <div class="cultural-context">
+                <h3>Cultural Context:</h3>
+                {% for context in cultural_contexts %}
+                <div class="context-card">
+                    <h4>{{ context.title }}</h4>
+                    <p>{{ context.description }}</p>
+                    <p>{{ context.content }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
             <div class="meta">
                 <p><strong>Category:</strong> {{ phrase.category }}</p>
                 <p><strong>Difficulty:</strong> {{ phrase.difficulty }}</p>
+                {% if phrase.category in ['writing_forms', 'literary_devices'] %}  <!-- Added conditional -->
+                <p><strong>Type:</strong> {{ phrase.display_name or phrase.category }}</p>
+                {% endif %}
             </div>
         </div>
     </main>
