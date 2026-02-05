@@ -1,0 +1,54 @@
+
+{
+  "grammar_rules": [
+    {
+      "id": 1,
+      "title": "Seboleli (Nouns)",
+      "description": "Nouns in Sesotho have classes (mehuta) that determine agreement with other words in the sentence.",
+      "examples": ["motse (village)", "bana (children)", "likolo (schools)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 2,
+      "title": "Leetsi (Pronouns)",
+      "description": "Pronouns replace nouns and agree with the noun class they refer to.",
+      "examples": ["ke (I)", "o (you, singular)", "re (we)", "ba (they, class 2)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 3,
+      "title": "Sephafi (Tenses)",
+      "description": "Sesotho verbs change form to indicate different tenses.",
+      "examples": ["ke ja (I eat - present)", "ke ile ka ja (I ate - past)", "ke tla ja (I will eat - future)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 4,
+      "title": "Bonako (Aspects)",
+      "description": "Verbal aspects indicate how an action relates to time (completed, ongoing, habitual).",
+      "examples": ["bojoale (habitual)", "bophetheho (perfective)", "bokhale (progressive)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 5,
+      "title": "Likutu-ketso tsa mahlomela (Verb Derivatives)",
+      "description": "Verbs can be modified to create different meanings through derivation.",
+      "examples": ["boetsuoa (reflexive)", "ketsetso (causative)", "ketsollo (reciprocal)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 6,
+      "title": "Sefetoli (Adverbs)",
+      "description": "Words that modify verbs, adjectives, or other adverbs.",
+      "examples": ["ka potlako (quickly)", "hantle (well)", "hang (now)"],
+      "categories": ["grammar_structures"]
+    },
+    {
+      "id": 7,
+      "title": "Mekhabo-puo (Figures of Speech)",
+      "description": "Literary devices used in Sesotho for expressive communication.",
+      "examples": ["papiso (simile)", "thehello (metaphor)", "pheta-pheto (repetition)"],
+      "categories": ["literary_devices"]
+    }
+  ]
+}
