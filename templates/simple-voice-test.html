@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Voice Test</title>
+</head>
+<body>
+    <h2>Voice Test for Sesotho AI</h2>
+    
+    <button id="record">🎤 Start Recording</button>
+    <button id="stop" disabled>⏹️ Stop</button>
+    
+    <div id="log" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc;"></div>
+    
+    <script>
+        const log = document.getElementById('log');
+        let mediaRecorder;
+        let chunks = [];
+        
+        function addLog(message) {
+            log.innerHTML += '<div>' + message + '</div>';
+            console.log(message);
+        }
+        
+        document.getElementById('record').onclick = async () => {
+            try {
+                addLog('1️⃣ Requesting microphone...');
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                addLog('2️⃣ ✅ Microphone access granted');
+                
+                mediaRecorder = new MediaRecorder(stream);
+                chunks = [];
+                
+                mediaRecorder.ondataavailable = (e) => {
+                    chunks.push(e.data);
+                    addLog('3️⃣ 📦 Received audio data: ' + e.data.size + ' bytes');
+                };
+                
+                mediaRecorder.onstop = async () => {
+                    addLog('4️⃣ ⏹️ Recording stopped');
+                    
+                    const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+                    addLog('5️⃣ 📁 Created blob: ' + audioBlob.size + ' bytes');
+                    
+                    // Test 1: Can we play it back?
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    const audio = new Audio(audioUrl);
+                    audio.onplay = () => addLog('6️⃣ ✅ Playback working - audio recorded successfully');
+                    audio.onerror = () => addLog('6️⃣ ❌ Cannot play back audio');
+                    audio.play();
+                    
+                    // Test 2: Try sending to your AI
+                    addLog('7️⃣ 📤 Attempting to send to AI...');
+                    
+                    const formData = new FormData();
+                    formData.append('audio', audioBlob, 'recording.webm');
+                    
+                    try {
+                        // Try different possible endpoints
+                        const endpoints = [
+                            '/transcribe',
+                            '/api/voice',
+                            '/voice-to-text',
+                            '/api/speech-to-text'
+                        ];
+                        
+                        for (let endpoint of endpoints) {
+                            addLog(`   Trying ${endpoint}...`);
+                            try {
+                                const response = await fetch(endpoint, {
+                                    method: 'POST',
+                                    body: formData
+                                });
+                                
+                                if (response.ok) {
+                                    const data = await response.json();
+                                    addLog(`   ✅ ${endpoint} responded!`);
+                                    addLog(`   Response: ${JSON.stringify(data)}`);
+                                    break;
+                                } else {
+                                    addLog(`   ❌ ${endpoint} returned ${response.status}`);
+                                }
+                            } catch (e) {
+                                addLog(`   ❌ ${endpoint} error: ${e.message}`);
+                            }
+                        }
+                    } catch (e) {
+                        addLog('❌ All endpoints failed: ' + e.message);
+                    }
+                    
+                    // Clean up
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                
+                mediaRecorder.start();
+                addLog('3️⃣ 🔴 Recording started...');
+                
+                document.getElementById('record').disabled = true;
+                document.getElementById('stop').disabled = false;
+                
+            } catch (error) {
+                addLog('❌ Microphone error: ' + error.message);
+            }
+        };
+        
+        document.getElementById('stop').onclick = () => {
+            mediaRecorder.stop();
+            document.getElementById('record').disabled = false;
+            document.getElementById('stop').disabled = true;
+        };
+    </script>
+</body>
+</html>
