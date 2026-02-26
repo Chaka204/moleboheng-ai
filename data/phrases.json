@@ -6,7 +6,7 @@
       "sesotho_phrase": "Lumela",
       "english_translation": "Hello",
       "category": "greetings",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["hello", "hi", "greet"]
     },
     {
@@ -14,7 +14,7 @@
       "sesotho_phrase": "Kea leboha",
       "english_translation": "Thank you",
       "category": "courtesy",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["thanks", "thank", "gratitude"]
     },
     {
@@ -22,7 +22,7 @@
       "sesotho_phrase": "Ee",
       "english_translation": "Yes",
       "category": "responses",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["yeh", "yeah", "okay"]
     },
     {
@@ -30,7 +30,7 @@
       "sesotho_phrase": "Che",
       "english_translation": "No",
       "category": "responses",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["nah", "nope", "no"]
     },
     {
@@ -38,7 +38,7 @@
       "sesotho_phrase": "Oa phela?",
       "english_translation": "How are you?",
       "category": "questions",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["how are you", "you good?", "how's it"]
     },
     {
@@ -46,7 +46,7 @@
       "sesotho_phrase": "Kea phela",
       "english_translation": "I am fine",
       "category": "responses",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["i'm fine", "okay", "i am perfect"]
     },
     {
@@ -54,7 +54,7 @@
       "sesotho_phrase": "U mang?",
       "english_translation": "Who are you?",
       "category": "questions",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["you are?", "your name?", "wha are you"]
     },
     {
@@ -62,7 +62,7 @@
       "sesotho_phrase": "Ke...",
       "english_translation": "I am...",
       "category": "responses",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["i...", "i am...", "ahhhh"]
     },
     {
@@ -70,7 +70,7 @@
       "sesotho_phrase": "Kae?",
       "english_translation": "Where?",
       "category": "questions",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["where", "where is", "where are"]
     },
     {
@@ -78,7 +78,7 @@
       "sesotho_phrase": "Neng?",
       "english_translation": "When?",
       "category": "questions",
-      "difficulty": "beginner"
+      "difficulty": "beginner",
       "keywords": ["when", "when is", "when will"]
     },
     {
@@ -86,7 +86,7 @@
       "sesotho_phrase": "Sere-semelo",
       "english_translation": "Adjective (describing word)",
       "category": "grammar_structures",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["", "", ""]
     },
     {
@@ -94,7 +94,7 @@
       "sesotho_phrase": "Sere-mahlomela",
       "english_translation": "Verb (action word)",
       "category": "grammar_structures",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["", "", ""]
     },
     {
@@ -102,7 +102,7 @@
       "sesotho_phrase": "Lekhotsa",
       "english_translation": "Interjection",
       "category": "grammar_structures",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["wow", "huh", "hmm"]
     },
     {
@@ -110,7 +110,7 @@
       "sesotho_phrase": "Sehokelo",
       "english_translation": "Conjunction",
       "category": "grammar_structures",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["and", "but", "then"]
     },
     {
@@ -118,7 +118,7 @@
       "sesotho_phrase": "Koetliso",
       "english_translation": "Exercise/Training",
       "category": "grammar_structures",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["", "", ""]
     },
     {
@@ -126,7 +126,7 @@
       "sesotho_phrase": "Kuruetso",
       "english_translation": "Circumcision ceremony",
       "category": "cultural_context",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -134,7 +134,7 @@
       "sesotho_phrase": "Mokhoenyana",
       "english_translation": "Son-in-law",
       "category": "cultural_context",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -142,7 +142,7 @@
       "sesotho_phrase": "Ngoetsi",
       "english_translation": "Daughter-in-law",
       "category": "cultural_context",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -150,7 +150,7 @@
       "sesotho_phrase": "Motsoalle",
       "english_translation": "Friend",
       "category": "family_relationships",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["friend", "", ""]
     },
     {
@@ -158,7 +158,7 @@
       "sesotho_phrase": "Matsema",
       "english_translation": "Community work parties",
       "category": "cultural_context",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -166,7 +166,7 @@
       "sesotho_phrase": "Papiso",
       "english_translation": "Simile",
       "category": "literary_devices",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -174,7 +174,7 @@
       "sesotho_phrase": "Thehello",
       "english_translation": "Metaphor",
       "category": "literary_devices",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -182,7 +182,7 @@
       "sesotho_phrase": "Pheta-pheto",
       "english_translation": "Repetition",
       "category": "literary_devices",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -190,7 +190,7 @@
       "sesotho_phrase": "Karaburetso",
       "english_translation": "Rhetorical question",
       "category": "literary_devices",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -198,7 +198,7 @@
       "sesotho_phrase": "Moqoqo-tšekatšeko",
       "english_translation": "Discursive essay",
       "category": "writing_forms",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -206,7 +206,7 @@
       "sesotho_phrase": "Moqoqo-tlhalosi",
       "english_translation": "Descriptive essay",
       "category": "writing_forms",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -214,7 +214,7 @@
       "sesotho_phrase": "Lengolo la setsoalle",
       "english_translation": "Friendly letter",
       "category": "writing_forms",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["", "", ""]
     },
     {
@@ -222,7 +222,7 @@
       "sesotho_phrase": "Lengolo la tšebetso",
       "english_translation": "Formal/business letter",
       "category": "writing_forms",
-      "difficulty": "intermediate"
+      "difficulty": "intermediate",
       "keywords": ["", "", ""]
     },
     {
@@ -230,7 +230,7 @@
       "sesotho_phrase": "Thothokiso",
       "english_translation": "Poem",
       "category": "writing_forms",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     },
     {
@@ -238,7 +238,7 @@
       "sesotho_phrase": "Tšomo",
       "english_translation": "Folktale",
       "category": "writing_forms",
-      "difficulty": "advanced"
+      "difficulty": "advanced",
       "keywords": ["", "", ""]
     }
   ]
