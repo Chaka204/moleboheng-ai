@@ -1,42 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ category.display_name }} - Sesotho Learning</title>  <!-- Changed -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Sesotho Learning: {{ category.display_name }}</h1>  <!-- Changed -->
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('all_categories') }}">All Categories</a>  <!-- Added -->
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <div class="category-phrases">
-            <h2>Phrases in "{{ category.display_name }}"</h2>  <!-- Changed -->
-            <p class="category-description">{{ category.description }}</p>  <!-- Added -->
-            
-            {% if phrases %}
-            <div class="phrase-list">
-                {% for phrase in phrases %}
-                <div class="phrase-card">
-                    <h3>{{ phrase.sesotho_phrase }}</h3>
-                    <p>{{ phrase.english_translation }}</p>
-                    <p class="difficulty">{{ phrase.difficulty }}</p>  <!-- Added -->
-                    <a href="{{ url_for('phrase_detail', phrase_id=phrase.id) }}" class="btn">
-                        Learn More
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p>No phrases found in this category.</p>
-            {% endif %}
+{% block title %}{{ category }} - Moleboheng AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('categories') }}">Categories</a></li>
+            <li class="breadcrumb-item active">{{ category }}</li>
+        </ol>
+    </nav>
+    
+    <h1>{{ category|title }} Phrases</h1>
+    
+    <div class="row mt-4">
+        <!-- Phrases will be loaded here via JavaScript -->
+        <div id="phrases-container" class="col-12">
+            <p>Loading phrases...</p>
         </div>
-    </main>
-</body>
-</html>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/phrases')
+            .then(response => response.json())
+            .then(phrases => {
+                const container = document.getElementById('phrases-container');
+                const categoryPhrases = phrases.filter(p => p.category === '{{ category }}');
+                
+                if (categoryPhrases.length === 0) {
+                    container.innerHTML = '<p>No phrases found in this category.</p>';
+                    return;
+                }
+                
+                let html = '<div class="list-group">';
+                categoryPhrases.forEach(phrase => {
+                    html += `
+                        <a href="/phrase/${phrase.id}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">${phrase.sesotho}</h5>
+                                <small>${phrase.category}</small>
+                            </div>
+                            <p class="mb-1">${phrase.english}</p>
+                        </a>
+                    `;
+                });
+                html += '</div>';
+                
+                container.innerHTML = html;
+            });
+    });
+</script>
+{% endblock %}
