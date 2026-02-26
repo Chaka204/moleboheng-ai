@@ -39,7 +39,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Use your Render URL here (update after deploying to Render)
-        const BACKEND_URL = 'http://localhost:5000'; // Change this to your Render URL later
+        const BACKEND_URL = window.location.origin;
         const voiceAI = new SesothoVoiceAI(BACKEND_URL);
         
         document.getElementById('initButton').onclick = () => voiceAI.initializeMicrophone();
