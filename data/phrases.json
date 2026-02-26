@@ -87,15 +87,15 @@
       "english_translation": "Adjective (describing word)",
       "category": "grammar_structures",
       "difficulty": "intermediate",
-      "keywords": ["", "", ""]
+      "keywords": ["good", "bad", "fine"]
     },
     {
       "id": 12,
-      "sesotho_phrase": "Sere-mahlomela",
+      "sesotho_phrase": "Leetsi",
       "english_translation": "Verb (action word)",
       "category": "grammar_structures",
       "difficulty": "intermediate",
-      "keywords": ["", "", ""]
+      "keywords": ["start", "stop", "speak"]
     },
     {
       "id": 13,
@@ -119,7 +119,7 @@
       "english_translation": "Exercise/Training",
       "category": "grammar_structures",
       "difficulty": "intermediate",
-      "keywords": ["", "", ""]
+      "keywords": ["work-out", "jogging", "gym"]
     },
     {
       "id": 16,
@@ -127,7 +127,7 @@
       "english_translation": "Circumcision ceremony",
       "category": "cultural_context",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["circumcise", "foreskin removal", "child birth ceremony"]
     },
     {
       "id": 17,
@@ -135,7 +135,7 @@
       "english_translation": "Son-in-law",
       "category": "cultural_context",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["daughter's husband", "daughter's boyfriend", "son in law"]
     },
     {
       "id": 18,
@@ -143,7 +143,7 @@
       "english_translation": "Daughter-in-law",
       "category": "cultural_context",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["son's wife", "son's girlfriend", "daughter in law"]
     },
     {
       "id": 19,
@@ -151,7 +151,7 @@
       "english_translation": "Friend",
       "category": "family_relationships",
       "difficulty": "intermediate",
-      "keywords": ["friend", "", ""]
+      "keywords": ["friend", "buddy", "aquaintance"]
     },
     {
       "id": 20,
@@ -159,7 +159,7 @@
       "english_translation": "Community work parties",
       "category": "cultural_context",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["work group", "village work", "neighbourly help"]
     },
     {
       "id": 21,
@@ -167,7 +167,7 @@
       "english_translation": "Simile",
       "category": "literary_devices",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["like", "same", "similar"]
     },
     {
       "id": 22,
@@ -175,7 +175,7 @@
       "english_translation": "Metaphor",
       "category": "literary_devices",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["is like", "just like", "as"]
     },
     {
       "id": 23,
@@ -183,7 +183,7 @@
       "english_translation": "Repetition",
       "category": "literary_devices",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["really really", "no no", "ohh yes ohh yes"]
     },
     {
       "id": 24,
@@ -191,7 +191,7 @@
       "english_translation": "Rhetorical question",
       "category": "literary_devices",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["can i really?", "are you crazy?", "are you joking?"]
     },
     {
       "id": 25,
@@ -199,7 +199,7 @@
       "english_translation": "Discursive essay",
       "category": "writing_forms",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["and then", "also", "which led"]
     },
     {
       "id": 26,
@@ -207,7 +207,7 @@
       "english_translation": "Descriptive essay",
       "category": "writing_forms",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["is like", "really...", "was really"]
     },
     {
       "id": 27,
@@ -215,7 +215,7 @@
       "english_translation": "Friendly letter",
       "category": "writing_forms",
       "difficulty": "intermediate",
-      "keywords": ["", "", ""]
+      "keywords": ["dear friend", "your dearest friend", "my friend"]
     },
     {
       "id": 28,
@@ -223,7 +223,7 @@
       "english_translation": "Formal/business letter",
       "category": "writing_forms",
       "difficulty": "intermediate",
-      "keywords": ["", "", ""]
+      "keywords": ["dear sir", "dear madam", "sincerely..."]
     },
     {
       "id": 29,
@@ -231,7 +231,7 @@
       "english_translation": "Poem",
       "category": "writing_forms",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["reside", "good poem", "poem"]
     },
     {
       "id": 30,
@@ -239,7 +239,7 @@
       "english_translation": "Folktale",
       "category": "writing_forms",
       "difficulty": "advanced",
-      "keywords": ["", "", ""]
+      "keywords": ["tales", "fairytale", "good tale"]
     }
   ]
 }
