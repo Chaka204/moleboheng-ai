@@ -7,6 +7,10 @@ app = Flask(__name__)
 CORS(app)  # Important for voice features
 
 # Your existing routes
+@app.route('/simple-voice-test')
+def simple_voice_test():
+    return render_template('simple-voice-test.html')
+
 @app.route('/')
 def index():
     return render_template('index.html')
