@@ -191,13 +191,6 @@ def index():
                          categories=categories,
                          phrases=db.get_all_phrases())
 
-@app.route('/phrase/<int:phrase_id>')
-def phrase_detail(phrase_id):
-    """Get detailed phrase information"""
-    phrase = db.get_phrase_with_responses(phrase_id)
-    if phrase:
-        return render_template('phrase_detail.html', phrase=phrase)
-    return "Phrase not found", 404
 
 @app.route('/category/<category_name>')
 def category_phrases(category_name):
