@@ -274,14 +274,15 @@ class MolebohengAI {
     }
     
     showWelcome() {
-        setTimeout(() => {
-            this.addMessage('bot', 'Lumela! Ke Moleboheng. U ka bua le \'na ka Sesotho.');
-            // Don't auto-speak on mobile
-            if (!this.isMobileDevice()) {
-                this.speakResponse('Lumela! Ke Moleboheng. U ka bua le nna ka Sesotho.');
-            }
-        }, 1000);
-    }
+    this.updateStatus('Connecting...');
+    setTimeout(() => {
+        this.addMessage('bot', 'Lumela! Ke Moleboheng. U ka bua le \'na ka Sesotho.');
+        this.updateStatus('Ready to speak Sesotho');
+        if (!this.isMobileDevice()) {
+            this.speakResponse('Lumela! Ke Moleboheng.');
+        }
+    }, 1000);
+}
     
     isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
