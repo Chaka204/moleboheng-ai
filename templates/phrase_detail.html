@@ -1,95 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ phrase.sesotho_phrase }} - Sesotho Learning</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Sesotho Learning</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('category_detail', category_name=phrase.category) }}">Back to Category</a>  <!-- Added -->
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <div class="phrase-detail">
-            <h2>{{ phrase.sesotho_phrase }}</h2>
-            <p class="translation">{{ phrase.english_translation }}</p>
+{% block title %}Phrase Details - Moleboheng AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('categories') }}">Categories</a></li>
+            <li class="breadcrumb-item"><a href="#" id="category-link">Category</a></li>
+            <li class="breadcrumb-item active" id="phrase-name">Phrase</li>
+        </ol>
+    </nav>
+    
+    <div class="card" id="phrase-detail">
+        <div class="card-body">
+            <h1 id="sesotho-phrase" class="card-title text-center mb-4">Loading...</h1>
             
-            <!-- Optional: Grammar rules section -->
-            {% if grammar_rules %}
-            <div class="grammar-section">
-                <h3>Grammar Concepts:</h3>
-                <ul>
-                    {% for rule in grammar_rules %}
-                    <li>
-                        <strong>{{ rule.title }}:</strong> {{ rule.description }}
-                        {% if rule.examples %}
-                        <br><em>Examples: {{ rule.examples|join(', ') }}</em>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            {% if phrase.response_options %}
-            <div class="responses">
-                <h3>Response Options:</h3>
-                <ul>
-                    {% for response in phrase.response_options %}
-                    <li>
-                        <strong>{{ response.response_sesotho }}</strong>
-                        <br>
-                        <em>{{ response.response_english }}</em>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            {% if phrase.examples %}
-            <div class="examples">
-                <h3>Usage Examples:</h3>
-                <ul>
-                    {% for example in phrase.examples %}
-                    <li>
-                        <strong>{{ example.example_sesotho }}</strong>
-                        <br>
-                        <em>{{ example.example_english }}</em>
-                        <span class="context">({{ example.context }})</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endif %}
-            
-            <!-- Cultural context section -->
-            {% if cultural_contexts %}
-            <div class="cultural-context">
-                <h3>Cultural Context:</h3>
-                {% for context in cultural_contexts %}
-                <div class="context-card">
-                    <h4>{{ context.title }}</h4>
-                    <p>{{ context.description }}</p>
-                    <p>{{ context.content }}</p>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">English Translation</div>
+                        <div class="card-body">
+                            <p id="english-translation" class="card-text">Loading...</p>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Pronunciation</div>
+                        <div class="card-body">
+                            <p id="pronunciation" class="card-text">Loading...</p>
+                            <button class="btn btn-primary mt-2" onclick="speakPhrase()">🔊 Listen</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% endif %}
             
-            <div class="meta">
-                <p><strong>Category:</strong> {{ phrase.category }}</p>
-                <p><strong>Difficulty:</strong> {{ phrase.difficulty }}</p>
-                {% if phrase.category in ['writing_forms', 'literary_devices'] %}  <!-- Added conditional -->
-                <p><strong>Type:</strong> {{ phrase.display_name or phrase.category }}</p>
-                {% endif %}
+            <div class="mt-4">
+                <div class="card">
+                    <div class="card-header">Usage Examples</div>
+                    <div class="card-body">
+                        <ul id="examples" class="list-unstyled">
+                            <li>Loading examples...</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
-</body>
-</html>
+    </div>
+</div>
+
+<script>
+    const phraseId = '{{ phrase_id }}';
+    
+    function speakPhrase() {
+        const phrase = document.getElementById('sesotho-phrase').textContent;
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(phrase);
+            utterance.lang = 'st-ZA';
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/phrases')
+            .then(response => response.json())
+            .then(phrases => {
+                const phrase = phrases.find(p => p.id === phraseId);
+                
+                if (!phrase) {
+                    document.getElementById('phrase-detail').innerHTML = '<h2>Phrase not found</h2>';
+                    return;
+                }
+                
+                document.getElementById('sesotho-phrase').textContent = phrase.sesotho;
+                document.getElementById('english-translation').textContent = phrase.english;
+                document.getElementById('pronunciation').textContent = phrase.pronunciation || 'Not available';
+                
+                const categoryLink = document.getElementById('category-link');
+                categoryLink.textContent = phrase.category;
+                categoryLink.href = `/category/${phrase.category}`;
+                
+                document.getElementById('phrase-name').textContent = phrase.sesotho;
+                
+                // Load examples if available
+                if (phrase.examples && phrase.examples.length > 0) {
+                    const examplesList = document.getElementById('examples');
+                    examplesList.innerHTML = '';
+                    phrase.examples.forEach(example => {
+                        const li = document.createElement('li');
+                        li.className = 'mb-2';
+                        li.innerHTML = `<strong>${example.sesotho}</strong><br><small>${example.english}</small>`;
+                        examplesList.appendChild(li);
+                    });
+                }
+            });
+    });
+</script>
+{% endblock %}
