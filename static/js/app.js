@@ -4,7 +4,7 @@ class MolebohengAI {
         this.micBtn = document.getElementById('micBtn');
         this.status = document.getElementById('status');
         this.suggestions = document.getElementById('suggestions');
-        
+        this.isProcessing = false;
         this.isListening = false;
         this.recognition = null;
         this.speechSupported = false;
