@@ -1,58 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moleboheng - Sesotho Voice AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗣️</text></svg>">
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>🗣️ Moleboheng</h1>
-            <p>Sesotho Voice AI Assistant</p>
-            <p>Bua ka Sesotho, ithute ka Sesotho</p>
-        </header>
-        
-        <div class="browser-note">
-            <p>💡 <strong>Best experienced in Chrome or Firefox</strong> with microphone access allowed.</p>
-        </div>
-        
-        <div class="status" id="status">Status: Loading...</div>
-        
-        <div class="controls">
-            <button id="micBtn" class="primary-btn">
-                🎤 Speak Sesotho
-            </button>
-        </div>
+{% extends "base.html" %}
 
-        <!-- Add this to your existing index.html -->
-<div class="categories">
-    <h2>Browse by Category</h2>
-    <div class="category-grid">
-        {% for category in categories %}
-        <a href="{{ url_for('category_phrases', category_name=category) }}" class="category-card">
-            {{ category }}
-        </a>
-        {% endfor %}
+{% block title %}Home - Moleboheng AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1>Welcome to Moleboheng AI</h1>
+        <p class="lead">Your Sesotho learning companion</p>
+        
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">📚 Learn Phrases</h5>
+                        <p class="card-text">Common Sesotho phrases for everyday use</p>
+                        <a href="{{ url_for('categories') }}" class="btn btn-primary">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">🗣️ Practice Speaking</h5>
+                        <p class="card-text">Use your voice to practice Sesotho</p>
+                        <a href="{{ url_for('voice') }}" class="btn btn-success">Try Voice</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">📖 Cultural Notes</h5>
+                        <p class="card-text">Learn about Basotho culture</p>
+                        <a href="#" class="btn btn-info">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-        
-        <div class="conversation" id="conversation">
-            <!-- Messages will appear here -->
-        </div>
-        
-        <div class="suggestions" id="suggestions">
-            <!-- Suggestions will appear here -->
-        </div>
-        
-        <div class="footer">
-            <p>Moleboheng AI &copy; 2024 | Ctrl+Space to toggle microphone</p>
-            <p>Voice AI for Sesotho language preservation</p>
-        </div>
-    </div>
-    
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</body>
-</html>
+{% endblock %}
