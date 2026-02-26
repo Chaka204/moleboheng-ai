@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moleboheng - Sesotho Voice AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗣️</text></svg>">
 </head>
 <body>
@@ -32,7 +32,7 @@
     <h2>Browse by Category</h2>
     <div class="category-grid">
         {% for category in categories %}
-        <a href="{{ url_for('category_phrases', category_name=category) }}" class="category-card">
+        <a href="{{ url_for('category_detail', category_name=category) }}" class="category-card">
             {{ category }}
         </a>
         {% endfor %}
@@ -53,6 +53,6 @@
         </div>
     </div>
     
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
