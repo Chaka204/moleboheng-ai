@@ -1,30 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Categories - Sesotho Learning</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Sesotho Learning Categories</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <div class="categories-grid">
-            {% for category in categories %}
-            <a href="{{ url_for('category_detail', category_name=category.name) }}" 
-               class="category-card">
-                <h3>{{ category.display_name }}</h3>
-                <p>{{ category.description }}</p>
-                <span class="category-count">View Phrases</span>
-            </a>
-            {% endfor %}
+{% block title %}Categories - Moleboheng AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Learning Categories</h1>
+    
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Greetings</h5>
+                    <p class="card-text">Learn how to greet in Sesotho</p>
+                    <a href="{{ url_for('category', category_name='greetings') }}" class="btn btn-primary">View Phrases</a>
+                </div>
+            </div>
         </div>
-    </main>
-</body>
-</html>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Family</h5>
+                    <p class="card-text">Family members and relationships</p>
+                    <a href="{{ url_for('category', category_name='family') }}" class="btn btn-primary">View Phrases</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Food & Dining</h5>
+                    <p class="card-text">Common food and restaurant phrases</p>
+                    <a href="{{ url_for('category', category_name='food') }}" class="btn btn-primary">View Phrases</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
