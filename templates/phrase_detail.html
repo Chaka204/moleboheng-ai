@@ -67,7 +67,7 @@
         fetch('/api/phrases')
             .then(response => response.json())
             .then(phrases => {
-                const phrase = phrases.find(p => p.id === phraseId);
+                const phrase = phrases.find(p => p.id === parseInt(phraseId));
                 
                 if (!phrase) {
                     document.getElementById('phrase-detail').innerHTML = '<h2>Phrase not found</h2>';
