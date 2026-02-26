@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Voice Assistant - Sesotho AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/voice.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Sesotho Voice Assistant</h1>
+    <p class="lead">Buoa ka lentsoe la hao (Speak in your voice)</p>
+    
+    <div class="voice-container">
+        <div class="text-center">
+            <button id="initButton" class="voice-button">🎤 Initialize Microphone</button>
+            <button id="recordButton" class="voice-button">🎤 Start Recording</button>
+        </div>
+        
+        <div id="voiceStatus" class="voice-status text-center">Ready</div>
+        
+        <div id="voiceResults" class="voice-results">
+            <!-- Results will appear here -->
+        </div>
+    </div>
+    
+    <div class="alert alert-info mt-4">
+        <strong>Tips:</strong>
+        <ul>
+            <li>Click "Initialize Microphone" first to allow access</li>
+            <li>Speak clearly in Sesotho</li>
+            <li>Click "Stop Recording" when done</li>
+            <li>Wait a few seconds for processing</li>
+        </ul>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Use your Render URL here (update after deploying to Render)
+        const BACKEND_URL = 'http://localhost:5000'; // Change this to your Render URL later
+        const voiceAI = new SesothoVoiceAI(BACKEND_URL);
+        
+        document.getElementById('initButton').onclick = () => voiceAI.initializeMicrophone();
+        
+        document.getElementById('recordButton').onclick = function() {
+            if (this.textContent.includes('Start')) {
+                voiceAI.startRecording();
+            } else {
+                voiceAI.stopRecording();
+            }
+        };
+    });
+</script>
+{% endblock %}
