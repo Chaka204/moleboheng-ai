@@ -1,4 +1,15 @@
+# First, essential build tools
+setuptools==69.0.3
+wheel==0.42.0
+
+# Basic Flask dependencies
 Flask==2.3.3
 Flask-CORS==4.0.0
 gunicorn==21.2.0
 python-dotenv==1.0.0
+
+# Scientific computing base (needed for Whisper)
+numpy==1.24.3
+
+# Now try Whisper
+openai-whisper==20231117
