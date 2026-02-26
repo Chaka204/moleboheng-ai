@@ -92,14 +92,16 @@ class SesothoAI:
                 'confidence': 0
             }
 
-# Initialize the AI after initializing the database
-db = SesothoDatabase()
-ai = SesothoAI(db)
-
 class SesothoDatabase:
     def __init__(self):
         self.data_path = "data"
         self.load_all_data()
+
+# Initialize the AI after initializing the database
+db = SesothoDatabase()
+ai = SesothoAI(db)
+
+
     
     def load_all_data(self):
         """Load all database files with fallback to old structure"""
