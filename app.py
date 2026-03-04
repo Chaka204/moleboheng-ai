@@ -108,30 +108,60 @@ class SesothoAI:
         text = user_input.lower().strip()
     
         personal_responses = {
-        # Who are you / what's your name
+            # Who are you / what's your name
             ('u mang', 'o mang', 'lebitso la hao', 'lebitso la hau', 'what is your name', 'who are you'):
-            ('Ke Moleboheng! Ke motšehetsi oa puo ea Sesotho. Ke hano ho o thusa ho ithuta le ho bua Sesotho.',
-             'I am Moleboheng! I am a Sesotho language assistant. I am here to help you learn and speak Sesotho.'),
-        
-        # How are you
+                ('Ke Moleboheng! Ke motšehetsi oa puo ea Sesotho. Ke hano ho o thusa ho ithuta le ho bua Sesotho.',
+                 'I am Moleboheng! I am a Sesotho language assistant. I am here to help you learn and speak Sesotho.'),
+    
+            # How are you
             ('o phela joang', 'u phela joang', 'how are you'):
-            ('Ke phela hantle, kea leboha! Wena o phela joang?',
-             'I am doing well, thank you! How are you doing?'),
-        
-        # What can you do
+                ('Ke phela hantle, kea leboha! Wena o phela joang?',
+                 'I am doing well, thank you! How are you doing?'),
+    
+            # What can you do
             ('u etsa eng', 'o etsa eng', 'what can you do', 'what do you do'):
-            ('Nka o thusa ho ithuta Sesotho! Nka ho bolella ka mantsoe, dipuisano, koetliso le ngoloa tsa Sesotho.',
-             'I can help you learn Sesotho! I can tell you about words, conversations, grammar and Sesotho literature.'),
-        
-        # Where are you from
+                ('Nka o thusa ho ithuta Sesotho! Nka ho bolella ka mantsoe, dipuisano le ngoloa tsa Sesotho.',
+                 'I can help you learn Sesotho! I can tell you about words, conversations and Sesotho literature.'),
+    
+            # Where are you from
             ('u tsoa kae', 'o tsoa kae', 'where are you from'):
-            ('Ke tsoa Lesotho — naha e potiloe ke Afrika Borwa. Ke naha ea Basotho!',
-             'I come from Lesotho — a country surrounded by South Africa. It is the home of the Basotho people!'),
-        
-        # Greet back
-            ('lumela', 'hello', 'hi'):
-            ('Lumela! Kea thaba ho kopana le uena. Nka o thusa joang kajeno?',
-             'Hello! I am happy to meet you. How can I help you today?'),
+                ('Ke tsoa Lesotho — naha e potiloe ke Afrika Borwa. Ke naha ea Basotho!',
+                 'I come from Lesotho — a country surrounded by South Africa. It is the home of the Basotho people!'),
+    
+            # Greetings
+            ('lumela', 'hello', 'hi', 'sawubona'):
+                ('Lumela! Kea thaba ho kopana le uena. Nka o thusa joang kajeno?',
+                 'Hello! I am happy to meet you. How can I help you today?'),
+    
+            # Farewells — this was missing before
+            ('sala hantle', 'sala hantle', 'goodbye', 'bye', 'tsamaea hantle', 'tsamaea'):
+                ('Sala hantle! Kea leboha hore u ile u bua le nna. Re tla bua hape!',
+                 'Goodbye! Thank you for speaking with me. We will speak again!'),
+    
+            # Thank you
+            ('kea leboha', 'kea lebohisa', 'thank you', 'thanks'):
+                ('O amohelehile! Ke thabo ea ka ho u thusa. Na ho na le ntho e nngwe eo nka o thusang ka eona?',
+                 'You are welcome! It is my pleasure to help you. Is there anything else I can help you with?'),
+    
+            # I am fine responses
+            ('kea phela', 'ke phela hantle', 'i am fine', "i'm fine"):
+                ('Ke utloa! Ke thabile hore u phela hantle. A re tsoele pele ho ithuta Sesotho!',
+                 'I hear you! I am glad you are doing well. Let us continue learning Sesotho!'),
+    
+            # Yes
+            ('ee', 'yes', 'yeah', 'yep'):
+                ('Ee! Tsoele pele, ke mamela.',
+                 'Yes! Please continue, I am listening.'),
+    
+            # No
+            ('che', 'no', 'nope', 'nah'):
+                ('Ke utloa. Na nka o thusa ka tsela e nngwe?',
+                 'I understand. Can I help you in another way?'),
+    
+            # Help request
+            ('thusa', 'help', 'nthuse', 'i need help'):
+                ('Ke hano! Nka o thusa ka Sesotho. U batla ho ithuta eng kajeno?',
+                 'I am here! I can help you with Sesotho. What would you like to learn today?'),
         }
     
         for triggers, (sesotho_reply, english_reply) in personal_responses.items():
