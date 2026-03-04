@@ -103,36 +103,112 @@ class SesothoAI:
 
         return best_phrase, best_score
 
-    def generate_response(self, user_input):
-        phrase, score = self.find_best_match(user_input)
+    def check_personal_questions(self, user_input):
+        """Handle questions directed at Moleboheng personally"""
+        text = user_input.lower().strip()
+    
+        personal_responses = {
+        # Who are you / what's your name
+            ('u mang', 'o mang', 'lebitso la hao', 'lebitso la hau', 'what is your name', 'who are you'):
+            ('Ke Moleboheng! Ke motšehetsi oa puo ea Sesotho. Ke hano ho o thusa ho ithuta le ho bua Sesotho.',
+             'I am Moleboheng! I am a Sesotho language assistant. I am here to help you learn and speak Sesotho.'),
+        
+        # How are you
+            ('o phela joang', 'u phela joang', 'how are you'):
+            ('Ke phela hantle, kea leboha! Wena o phela joang?',
+             'I am doing well, thank you! How are you doing?'),
+        
+        # What can you do
+            ('u etsa eng', 'o etsa eng', 'what can you do', 'what do you do'):
+            ('Nka o thusa ho ithuta Sesotho! Nka ho bolella ka mantsoe, dipuisano, koetliso le ngoloa tsa Sesotho.',
+             'I can help you learn Sesotho! I can tell you about words, conversations, grammar and Sesotho literature.'),
+        
+        # Where are you from
+            ('u tsoa kae', 'o tsoa kae', 'where are you from'):
+            ('Ke tsoa Lesotho — naha e potiloe ke Afrika Borwa. Ke naha ea Basotho!',
+             'I come from Lesotho — a country surrounded by South Africa. It is the home of the Basotho people!'),
+        
+        # Greet back
+            ('lumela', 'hello', 'hi'):
+            ('Lumela! Kea thaba ho kopana le uena. Nka o thusa joang kajeno?',
+             'Hello! I am happy to meet you. How can I help you today?'),
+        }
+    
+        for triggers, (sesotho_reply, english_reply) in personal_responses.items():
+            for trigger in triggers:
+                if trigger in text:
+                    return {
+                        'response': sesotho_reply,
+                        'english': english_reply,
+                        'match_type': 'personal',
+                        'intent': 'personal_question',
+                        'confidence': 1.0
+                    }
+        return None
 
+    def check_translation_request(self, user_input):
+        """Detect if user is explicitly asking for a translation"""
+        text = user_input.lower().strip()
+        translation_triggers = [
+            'translate', 'fetola', 'what does', 'what is', 'meaning of',
+            'ho bolela eng', 'bolela ka sekhooa', 'in english', 'ka sesotho'
+        ]
+        return any(trigger in text for trigger in translation_triggers)    
+
+
+    
+    def generate_response(self, user_input):
+        """Generate a response based on user input"""
+        
+        # 1. Check if it's a personal question first
+        personal = self.check_personal_questions(user_input)
+        if personal:
+            return personal
+    
+        # 2. Check if user is explicitly asking for a translation
+        wants_translation = self.check_translation_request(user_input)
+    
+        # 3. Find best phrase match
+        phrase, score = self.find_best_match(user_input)
+    
         if phrase and score > 0.5:
             responses = [
                 r for r in self.db.responses.get('responses', [])
                 if r.get('phrase_id') == phrase['id']
             ]
-
-            if responses:
+    
+            if wants_translation:
+                # User asked for translation — give it
+                return {
+                    'response': f'"{phrase["sesotho_phrase"]}" e bolela "{phrase["english_translation"]}" ka Sekhooa.',
+                    'english': phrase['english_translation'],
+                    'match_type': 'translation',
+                    'intent': phrase.get('category', 'general'),
+                    'confidence': round(score, 2),
+                }
+            elif responses:
+                # Normal conversation — respond naturally
                 response = random.choice(responses)
                 return {
                     'response': response.get('response_sesotho', 'Kea leboha.'),
-                    'english': response.get('response_english', 'Thank you.'),
+                    'english': response.get('response_english', ''),
                     'match_type': 'direct_match' if score > 0.8 else 'close_match',
                     'intent': phrase.get('category', 'general'),
                     'confidence': round(score, 2),
                 }
             else:
+                # Match found but no response — converse naturally
                 return {
-                    'response': f"O itse: \"{phrase['sesotho_phrase']}\" — {phrase['english_translation']}",
-                    'english': phrase['english_translation'],
+                    'response': f'Ee, ke utloa! O bolela ka "{phrase["sesotho_phrase"]}". Nka o thusa joang?',
+                    'english': '',
                     'match_type': 'phrase_only',
                     'intent': phrase.get('category', 'general'),
                     'confidence': round(score, 2),
                 }
         else:
             return {
-                'response': 'Ke kopa utloisise. Ka kopo, buisa hape.',
-                'english': 'I did not understand. Please say it again.',
+                'response': 'Ke kopa utloisise. Ka kopo, buisa hape, kapa u botse ka tsela e fapaneng.',
+                'english': 'I did not understand. Please say it again, or ask in a different way.',
                 'match_type': 'no_match',
                 'intent': 'unknown',
                 'confidence': 0,
