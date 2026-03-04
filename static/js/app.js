@@ -360,7 +360,13 @@ document.addEventListener('DOMContentLoaded', () => {
             color: #856404;
         `;
         warning.innerHTML = '💡 <strong>Tip:</strong> For best speech recognition, use Chrome or Firefox browser.';
-        document.querySelector('.container').insertBefore(warning, document.querySelector('.browser-note').nextSibling);
+        const browserNote = document.querySelector('.browser-note');
+const container = document.querySelector('.container');
+if (browserNote && container) {
+    container.insertBefore(warning, browserNote.nextSibling);
+} else if (container) {
+    container.prepend(warning);
+}
     }
     
     window.moleboheng = new MolebohengAI();
