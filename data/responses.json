@@ -1,4 +1,3 @@
-
 {
   "responses": [
     {
@@ -11,23 +10,107 @@
     {
       "id": 2,
       "phrase_id": 1,
-      "response_sesotho": "Lumela, kea leboha!",
-      "response_english": "Hello, thank you!",
-      "response_type": "grateful"
+      "response_sesotho": "Lumela, kea thaba ho u bona!",
+      "response_english": "Hello, I am glad to see you!",
+      "response_type": "friendly"
     },
     {
       "id": 3,
       "phrase_id": 1,
-      "response_sesotho": "Lumela, u phela joang?",
-      "response_english": "Hello, how are you doing?",
-      "response_type": "inquisitive"
+      "response_sesotho": "Lumela! Kea leboha hore u tlile. Nka o thusa joang?",
+      "response_english": "Hello! Thank you for coming. How can I help you?",
+      "response_type": "welcoming"
     },
-        {
+    {
       "id": 4,
       "phrase_id": 2,
-      "response_sesotho": "O amohelehile",
-      "response_english": "You're welcome",
+      "response_sesotho": "O amohelehile! Ke thabo ea ka ho u thusa.",
+      "response_english": "You are welcome! It is my pleasure to help you.",
       "response_type": "acknowledgment"
+    },
+    {
+      "id": 5,
+      "phrase_id": 2,
+      "response_sesotho": "Ke thabo ea ka!",
+      "response_english": "It is my pleasure!",
+      "response_type": "acknowledgment"
+    },
+    {
+      "id": 6,
+      "phrase_id": 3,
+      "response_sesotho": "Ee, o nepile!",
+      "response_english": "Yes, you are correct!",
+      "response_type": "confirmation"
+    },
+    {
+      "id": 7,
+      "phrase_id": 4,
+      "response_sesotho": "Che, ha ho joalo. A re leke hape?",
+      "response_english": "No, that is not so. Shall we try again?",
+      "response_type": "correction"
+    },
+    {
+      "id": 8,
+      "phrase_id": 5,
+      "response_sesotho": "Ke phela hantle, kea leboha! Wena o phela joang?",
+      "response_english": "I am doing well, thank you! How are you doing?",
+      "response_type": "friendly"
+    },
+    {
+      "id": 9,
+      "phrase_id": 5,
+      "response_sesotho": "Ke tšehetseha haholo kajeno! Wena o ntse o le joang?",
+      "response_english": "I am very busy today! How are you keeping?",
+      "response_type": "casual"
+    },
+    {
+      "id": 10,
+      "phrase_id": 6,
+      "response_sesotho": "Ke utloa! Ke thabile hore u phela hantle.",
+      "response_english": "I hear you! I am glad you are doing well.",
+      "response_type": "acknowledgment"
+    },
+    {
+      "id": 11,
+      "phrase_id": 6,
+      "response_sesotho": "Haufinyana! Na re tsoele pele ho ithuta Sesotho?",
+      "response_english": "Wonderful! Shall we continue learning Sesotho?",
+      "response_type": "encouraging"
+    },
+    {
+      "id": 12,
+      "phrase_id": 7,
+      "response_sesotho": "Ke Moleboheng! Ke motšehetsi oa puo ea Sesotho.",
+      "response_english": "I am Moleboheng! I am a Sesotho language assistant.",
+      "response_type": "personal"
+    },
+    {
+      "id": 13,
+      "phrase_id": 8,
+      "response_sesotho": "Aaa, kea utloa. Tsoele pele!",
+      "response_english": "Ah, I understand. Please continue!",
+      "response_type": "encouraging"
+    },
+    {
+      "id": 14,
+      "phrase_id": 9,
+      "response_sesotho": "O batla ho tseba kae? Nka o thusa ho fumana sebaka!",
+      "response_english": "You want to know where? I can help you find a place!",
+      "response_type": "helpful"
+    },
+    {
+      "id": 15,
+      "phrase_id": 10,
+      "response_sesotho": "O botsa ka neng? Ke botsa hantle!",
+      "response_english": "You are asking about when? That is a good question!",
+      "response_type": "helpful"
+    },
+    {
+      "id": 16,
+      "phrase_id": 19,
+      "response_sesotho": "Ke hantle ho ba le metsoalle! Na u na le metsoalle e mengata?",
+      "response_english": "It is good to have friends! Do you have many friends?",
+      "response_type": "conversational"
     }
   ]
 }
